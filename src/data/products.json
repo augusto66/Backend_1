@@ -1,0 +1,57 @@
+[
+	{
+		"id": "dd536769-bf33-41b6-876e-a24754490e36",
+		"title": "titulo",
+		"description": "description",
+		"code": 1234,
+		"price": 200,
+		"status": true,
+		"stock": 10,
+		"category": "categoria",
+		"thumbnails": []
+	},
+	{
+		"id": "36640fac-f282-435d-b550-a24b1b2de526",
+		"title": "titulo 2",
+		"description": "description 2",
+		"code": 1234,
+		"price": 200,
+		"status": true,
+		"stock": 12,
+		"category": "categoria",
+		"thumbnails": []
+	},
+	{
+		"id": "67cbd923-2209-494f-a81a-ef0b3c82657e",
+		"title": "titulo 3",
+		"description": "description 3",
+		"code": 1234,
+		"price": 200,
+		"status": true,
+		"stock": 12,
+		"category": "categoria",
+		"thumbnails": []
+	},
+	{
+		"id": "f8bb66d4-d897-4112-97db-33cb2b03ebc4",
+		"title": "Camiseta Deportiva",
+		"description": "Camiseta ligera",
+		"code": 101,
+		"price": 250,
+		"status": true,
+		"stock": 50,
+		"category": "ropa",
+		"thumbnails": []
+	},
+	{
+		"id": "e02cd442-530f-458f-b6df-6897c574e0b6",
+		"title": "Pantalon Deportiva",
+		"description": "Pantalon verano",
+		"code": 102,
+		"price": 350,
+		"status": true,
+		"stock": 190,
+		"category": "ropa",
+		"thumbnails": []
+	}
+]
