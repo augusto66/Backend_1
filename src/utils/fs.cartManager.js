@@ -12,17 +12,16 @@ const __dirname = path.dirname(__filename)
 const pathToCarts = path.join(__dirname, '../data/carts.json')
 const pathToProducts = path.join(__dirname, '../data/products.json')
 
-// Rutas a los archivos de productos y carritos
-// const pathToCarts = path.join(__dirname, '../data/carts.json')
-// const pathToProducts = path.join(__dirname, '../data/products.json')
-
 // Función para leer un archivo JSON
 const readFile = async (filePath) => {
   try {
-    const data = await fs.promises.readFile(filePath, 'utf-8')
-    return JSON.parse(data)
+    const data = await fs.promises.readFile(filePath, 'utf-8');
+    return JSON.parse(data) || []; // Asegura que sea un array
   } catch (error) {
-    throw new Error(`Error al leer el archivo ${filePath}: ${error.message}`)
+    if (error.code === "ENOENT") {
+      return []; // Si el archivo no existe, inicializarlo con un array vacío
+    }
+    throw new Error(`Error al leer el archivo ${filePath}: ${error.message}`);
   }
 };
 
@@ -68,28 +67,30 @@ const fsCartManager = {
   // Agregar un producto al carrito
   async addProductToCart(cartId, productId) {
     try {
-      let carts = await readFile(pathToCarts)
-      const cart = carts.find((cart) => cart.id === cartId)
+      let carts = await readFile(pathToCarts);
+      const cart = carts.find((cart) => cart.id === cartId);
+  
       if (!cart) {
-        throw new Error('Carrito no encontrado')
+        throw new Error("Carrito no encontrado");
       }
-
+  
       // Verificar si el producto ya está en el carrito
-      const productIndex = cart.products.findIndex((product) => product.product === productId)
+      const productIndex = cart.products.findIndex((product) => product.id === productId);
       
       if (productIndex !== -1) {
         // Si el producto ya existe, incrementar la cantidad
-        cart.products[productIndex].quantity += 1
+        cart.products[productIndex].quantity += 1;
       } else {
         // Si no existe, agregar el producto con quantity 1
-        cart.products.push({ product: productId, quantity: 1 })
+        cart.products.push({ id: productId, quantity: 1 });
       }
-
-      await writeFile(pathToCarts, carts)
+  
+      await writeFile(pathToCarts, carts);
       return cart.products;
     } catch (error) {
-      throw new Error(`Error al agregar producto al carrito: ${error.message}`)
+      throw new Error(`Error al agregar producto al carrito: ${error.message}`);
     }
+  
   },
 
   // Verificar si el producto existe
